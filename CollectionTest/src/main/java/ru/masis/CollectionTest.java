@@ -26,29 +26,29 @@ public class CollectionTest {
         long start;
         long end;
 
-        start = System.currentTimeMillis();
+        start = System.nanoTime();
         for (int i = 0; i < 200000; i++) {
             users.add(generateRandomUser());
         }
-        end = System.currentTimeMillis();
+        end = System.nanoTime();
         timeOfAdd = end - start;
-        System.out.println("add time 200000 items " + timeOfAdd + "ms");
+        System.out.println("add time 200000 items " + timeOfAdd + "ns");
 
-        start = System.currentTimeMillis();
+        start = System.nanoTime();
         for (int i = 100000; i < 150000; i++) {
             users.remove(i);
         }
-        end = System.currentTimeMillis();
+        end = System.nanoTime();
         timeOfRemove = end - start;
 
         System.out.println("removal time of 50000 items " + timeOfRemove + "ms");
 
-        start = System.currentTimeMillis();
+        start = System.nanoTime();
         User user = users.get(users.size()/2);
-        end = System.currentTimeMillis();
+        end = System.nanoTime();
         timeOfSearch = end - start;
 
-        System.out.println("item search time in the middle of the collection " + timeOfSearch + "ms");
+        System.out.println("item search time in the middle of the collection " + timeOfSearch + "ns");
     }
 
     public void testLinkedList() {
@@ -59,29 +59,29 @@ public class CollectionTest {
         long start;
         long end;
 
-        start = System.currentTimeMillis();
+        start = System.nanoTime();
         for (int i = 0; i < 200000; i++) {
             users.add(generateRandomUser());
         }
-        end = System.currentTimeMillis();
+        end = System.nanoTime();
         timeOfAdd = end - start;
-        System.out.println("add time 200000 items " + timeOfAdd + "ms");
+        System.out.println("add time 200000 items " + timeOfAdd + "ns");
 
-        start = System.currentTimeMillis();
+        start = System.nanoTime();
         for (int i = 100000; i < 150000; i++) {
             users.remove(i);
         }
-        end = System.currentTimeMillis();
+        end = System.nanoTime();
         timeOfRemove = end - start;
 
-        System.out.println("removal time of 50000 items " + timeOfRemove + "ms");
+        System.out.println("removal time of 50000 items " + timeOfRemove + "ns");
 
-        start = System.currentTimeMillis();
+        start = System.nanoTime();
         User user = users.get(users.size()/2);
-        end = System.currentTimeMillis();
+        end = System.nanoTime();
         timeOfSearch = end - start;
 
-        System.out.println("item search time in the middle of the collection " + timeOfSearch + "ms");
+        System.out.println("item search time in the middle of the collection " + timeOfSearch + "ns");
     }
 
     public static void main(String[] args) {
