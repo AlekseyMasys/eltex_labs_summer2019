@@ -10,9 +10,7 @@ public class Jdbc {
     private final String username = "root";
     private final String password = "8077597a";
     private final String UrlDatabase = "jdbc:mysql://localhost:3306/users_db?useSSL=false";
-    {
 
-    }
     public void writeToDatabase(List<User> users) throws SQLException {
         try(Connection connection = DriverManager.getConnection(UrlDatabase, username, password)) {
             System.out.println("Connected to database");

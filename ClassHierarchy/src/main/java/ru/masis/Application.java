@@ -18,7 +18,7 @@ public class Application {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("------------------------------FROM CSV------------------------------");
+        System.out.println("-----------------------FROM CSV---------------------------");
         usersFromCsv.forEach(System.out::println);//show all users from csv file
         System.out.println("----------------------FROM JSON---------------------------");
 
@@ -26,6 +26,12 @@ public class Application {
         String jsonString = user.toJSON();
         user.fromJSON(jsonString);
         System.out.println(user);
+
+        JdbcTest jdbcTest = new JdbcTest();
+
+        System.out.println("-----------------test the transaction----------------------");
+        jdbcTest.writeToDatabaseWithoutTransaction();
+        jdbcTest.writeToDatabaseWithTransaction();
     }
 
     private static List<User> readUsersFromCsv() {
