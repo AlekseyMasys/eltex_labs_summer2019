@@ -1,5 +1,8 @@
 package ru.masis;
 
+import lombok.Cleanup;
+import lombok.SneakyThrows;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,12 +10,12 @@ import java.util.List;
 
 public class Jdbc {
     private String languagesString = "";
-    private final String username = "root";
+    private final String userName = "root";
     private final String password = "8077597a";
-    private final String UrlDatabase = "jdbc:mysql://localhost:3306/users_db?useSSL=false";
+    private final String urlDatabase = "jdbc:mysql://localhost:3306/users_db?useSSL=false";
 
     public void writeToDatabase(List<User> users) throws SQLException {
-        try(Connection connection = DriverManager.getConnection(UrlDatabase, username, password)) {
+        try(Connection connection = DriverManager.getConnection(urlDatabase, userName, password)) {
             System.out.println("Connected to database");
             Statement statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE IF EXISTS developers");
@@ -39,7 +42,7 @@ public class Jdbc {
 
     public void dispToConsoleFromDatabase() throws SQLException {
         List<User> users = new ArrayList<>();
-        try(Connection connection = DriverManager.getConnection(UrlDatabase, username, password)) {
+        try(Connection connection = DriverManager.getConnection(urlDatabase, userName, password)) {
             System.out.println("Connected to database");
             Statement statement = connection.createStatement();
             ResultSet resultSet1 = statement.executeQuery("SELECT * FROM developers");
@@ -70,5 +73,20 @@ public class Jdbc {
             e.printStackTrace();
         }
        users.forEach(System.out::println);
+    }
+
+    @SneakyThrows(SQLException.class)
+    public void dispUnionTables() {
+        @Cleanup Connection connection = DriverManager.getConnection(urlDatabase, userName, password);
+        System.out.println("Connected to database");
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT id, fio as инициалы, number as номер, email as почта " +
+                "FROM developers UNION SELECT id, fio, number, email FROM managers");
+        int i = 1;
+        while (resultSet.next()) {
+            System.out.printf("The user number: " + i +  "%n%d %s %s %s%n", resultSet.getInt("id"), resultSet.getString("инициалы"),
+                    resultSet.getString("номер"),resultSet.getString("почта"));
+            i++;
+        }
     }
 }

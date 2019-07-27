@@ -18,20 +18,22 @@ public class Application {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("-----------------------FROM CSV---------------------------");
-        usersFromCsv.forEach(System.out::println);//show all users from csv file
-        System.out.println("----------------------FROM JSON---------------------------");
+        jdbc.dispUnionTables();
+//        System.out.println("-----------------------FROM CSV---------------------------");
+//        usersFromCsv.forEach(System.out::println);//show all users from csv file
+//        System.out.println("----------------------FROM JSON---------------------------");
+//
+//        User user = new User("8", "SteelArnie","88005553535", "email");
+//        String jsonString = user.toJSON();
+//        user.fromJSON(jsonString);
+//        System.out.println(user);
+//
+//        JdbcTest jdbcTest = new JdbcTest();
+//
+//        System.out.println("-----------------test the transaction----------------------");
+//        jdbcTest.writeToDatabaseWithoutTransaction();
+//        jdbcTest.writeToDatabaseWithTransaction();
 
-        User user = new User("8", "SteelArnie","88005553535", "email");
-        String jsonString = user.toJSON();
-        user.fromJSON(jsonString);
-        System.out.println(user);
-
-        JdbcTest jdbcTest = new JdbcTest();
-
-        System.out.println("-----------------test the transaction----------------------");
-        jdbcTest.writeToDatabaseWithoutTransaction();
-        jdbcTest.writeToDatabaseWithTransaction();
     }
 
     private static List<User> readUsersFromCsv() {
