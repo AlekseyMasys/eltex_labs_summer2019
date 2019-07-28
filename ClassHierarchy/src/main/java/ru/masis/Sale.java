@@ -1,5 +1,9 @@
 package ru.masis;
 
+
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 public class Sale {
     private String item;
     private Double price;

@@ -1,10 +1,13 @@
 package ru.masis;
 
+import lombok.Getter;
+
 import java.util.Arrays;
 
 public class Manager extends User {
 
     private String type;
+    @Getter
     private Sale[] sales;
 
     public Manager() {
@@ -61,4 +64,5 @@ public class Manager extends User {
                 ", email='" + email + '\'' +
                 '}';
     }
+
 }

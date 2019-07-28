@@ -10,15 +10,18 @@ public class Application {
     public static void main(String[] args) {
         writeUsersToCsv();
         List<User> usersFromCsv = readUsersFromCsv();
-        Jdbc jdbc = new Jdbc();
-        try {
-            jdbc.writeToDatabase(usersFromCsv);
-            System.out.println("--------------------------FROM DATABASE----------------------------------");
-            jdbc.dispToConsoleFromDatabase();    // show all users from database
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        jdbc.dispUnionTables();
+        DUMP jdbc = new DUMP();
+        jdbc.writeToDatabaseNormalizedTable(usersFromCsv); // запись в базу данных и приведение к третьей нормальной форме
+
+//        try {
+//            jdbc.writeToDatabase(usersFromCsv);
+//            System.out.println("--------------------------FROM DATABASE----------------------------------");
+//            jdbc.dispToConsoleFromDatabase();    // show all users from database
+//        } catch (SQLException e) {
+//
+//            e.printStackTrace();
+//        }
+//        jdbc.dispUnionTables();
 //        System.out.println("-----------------------FROM CSV---------------------------");
 //        usersFromCsv.forEach(System.out::println);//show all users from csv file
 //        System.out.println("----------------------FROM JSON---------------------------");
@@ -33,7 +36,6 @@ public class Application {
 //        System.out.println("-----------------test the transaction----------------------");
 //        jdbcTest.writeToDatabaseWithoutTransaction();
 //        jdbcTest.writeToDatabaseWithTransaction();
-
     }
 
     private static List<User> readUsersFromCsv() {
