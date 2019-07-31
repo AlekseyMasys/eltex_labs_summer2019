@@ -10,22 +10,32 @@ public class Application {
     public static void main(String[] args) {
         writeUsersToCsv();
         List<User> usersFromCsv = readUsersFromCsv();
-        Jdbc jdbc = new Jdbc();
-        try {
-            jdbc.writeToDatabase(usersFromCsv);
-            System.out.println("--------------------------FROM DATABASE----------------------------------");
-            jdbc.dispToConsoleFromDatabase();    // show all users from database
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        System.out.println("------------------------------FROM CSV------------------------------");
-        usersFromCsv.forEach(System.out::println);//show all users from csv file
-        System.out.println("----------------------FROM JSON---------------------------");
+        DUMP jdbc = new DUMP();
+        jdbc.writeToDatabaseNormalizedTable(usersFromCsv); // запись в базу данных и приведение к третьей нормальной форме
 
-        User user = new User("8", "SteelArnie","88005553535", "email");
-        String jsonString = user.toJSON();
-        user.fromJSON(jsonString);
-        System.out.println(user);
+//        try {
+//            jdbc.writeToDatabase(usersFromCsv);
+//            System.out.println("--------------------------FROM DATABASE----------------------------------");
+//            jdbc.dispToConsoleFromDatabase();    // show all users from database
+//        } catch (SQLException e) {
+//
+//            e.printStackTrace();
+//        }
+//        jdbc.dispUnionTables();
+//        System.out.println("-----------------------FROM CSV---------------------------");
+//        usersFromCsv.forEach(System.out::println);//show all users from csv file
+//        System.out.println("----------------------FROM JSON---------------------------");
+//
+//        User user = new User("8", "SteelArnie","88005553535", "email");
+//        String jsonString = user.toJSON();
+//        user.fromJSON(jsonString);
+//        System.out.println(user);
+//
+//        JdbcTest jdbcTest = new JdbcTest();
+//
+//        System.out.println("-----------------test the transaction----------------------");
+//        jdbcTest.writeToDatabaseWithoutTransaction();
+//        jdbcTest.writeToDatabaseWithTransaction();
     }
 
     private static List<User> readUsersFromCsv() {
