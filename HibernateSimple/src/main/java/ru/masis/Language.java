@@ -3,8 +3,7 @@ package ru.masis;
 
 import lombok.*;
 import javax.persistence.*;
-
-
+import java.util.List;
 
 
 @Entity
@@ -22,9 +21,9 @@ public class Language {
     @Getter @Setter
     private String title;
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "user_language", joinColumns = @JoinColumn(name = "language_id"),
-//            inverseJoinColumns = @JoinColumn(name = "user_id"))
-//    @Getter @Setter
-//    private List<User> users;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_language", joinColumns = @JoinColumn(name = "language_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @Getter @Setter
+    private List<User> users;
 }

@@ -11,24 +11,18 @@ import java.util.List;
 
 
 public class Application {
-    private Session session = null;
+    private  SessionFactory sessionFactory = createHibernateSession();
 
     public static void main(String[] args) {
         new Application();
     }
     public Application() {
-        session = createHibernateSession();
-        if (session != null) {
             recordsAdd();
             recordsRead();
-        }
-        if(session.isOpen()) {
-            session.close();
-        }
     }
 
     private void recordsAdd() {
-
+        Session session = sessionFactory.openSession();
         Transaction tr = session.beginTransaction();
         Passport passport1 = new Passport();
         passport1.setNumber("777");
@@ -70,25 +64,34 @@ public class Application {
         session.save(user1);
         session.save(user2);
         tr.commit();
+        session.close();
     }
 
     private void recordsRead() {
-        @SuppressWarnings("unchecked")
+        Session session = sessionFactory.openSession();
+        Transaction tr = session.beginTransaction();
         List<User> users = session.createQuery("from " + User.class.getSimpleName()).list(); // получаем всех пользователей
-        users.forEach(System.out::println);
+        users.forEach(elem -> elem.getLanguages().forEach(titl -> System.out.println(titl.getTitle())));  // выводим языки у всех пользователей
+
+        System.out.println("---------------------------------------------------------------------");
+
+        List<Language> languages = session.createQuery("from " + Language.class.getSimpleName()).list(); // получаем все языки
+        languages.forEach(elem -> elem.getUsers().forEach(user -> System.out.println(user.getFio()))); // выводим всех пользователей у языков
+
+        session.close();
     }
 
-    private Session createHibernateSession() {
+    private  SessionFactory createHibernateSession() {
         SessionFactory sessionFactory = null;
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         try {
             sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-            session = sessionFactory.openSession();
+            //session = sessionFactory.openSession();
         }
         catch (Exception e) {
             StandardServiceRegistryBuilder.destroy(registry);
             throw e;
         }
-        return session;
+        return sessionFactory;
     }
 }
