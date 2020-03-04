@@ -8,7 +8,7 @@
     <artifactId>smolljar</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <jakson>2.9.8</jakson>
+        <jakson>2.9.10.3</jakson>
     </properties>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
