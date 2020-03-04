@@ -12,7 +12,7 @@
         <!--<java.version>1.8</java.version>-->
         <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
         <!--<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>-->
-        <jakson>2.9.8</jakson>
+        <jakson>2.9.10.3</jakson>
     </properties>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
